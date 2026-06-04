@@ -1,6 +1,9 @@
 from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
+from langchain.agents import create_agent
+from langchain.tools import tool
+import random
 
 load_dotenv()
 
@@ -9,8 +12,7 @@ llm = ChatOpenAI(
     temperature=0.7
 )
 
-from langchain.tools import tool
-import random
+
 
 @tool
 def consult_demogorgon(complaint: str) -> str:
@@ -39,8 +41,15 @@ tools = [
     ask_NDGT
 ]
 
-print(f"Created {len(tools)} tools:")
+agent = create_agent(
+    model=llm,
+    tools=tools,
+    system_prompt=(
+        "You are Becma's Chaos Mode, a creative complaint handler for the "
+        "Normal Objects universe. Handle fictional complaints in a playful, "
+        "imaginative way. Use your tools when they would help. You may combine "
+        "multiple tool perspectives if useful."
+    )
+)
 
-for tool in tools:
-    print(f"- {tool.name}")
-
+print("Agent created successfully.")
