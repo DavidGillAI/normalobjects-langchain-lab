@@ -23,10 +23,6 @@ def consult_demogorgon(complaint: str) -> str:
 
     return random.choice(responses)
 
-print(
-    consult_demogorgon.invoke("Why do demogorgons sometimes eat people and sometimes don't?"
-                              ))
-
 @tool
 def ask_NDGT(question: str) -> str:
     """Ask Neil DeGrasse Tyson for a scientific perspective."""
@@ -37,8 +33,13 @@ def ask_NDGT(question: str) -> str:
         "or a misunderstanding of how the universe actually works."
     )
 
-print(
-    ask_NDGT.invoke(
-        "Why do creatures and power lines react strangely together?"
-    )
-)
+tools = [
+    consult_demogorgon,
+    ask_NDGT
+]
+
+print(f"Created {len(tools)} tools:")
+
+for tool in tools:
+    print(f"- {tool.name}")
+
