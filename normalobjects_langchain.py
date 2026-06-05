@@ -28,17 +28,73 @@ def consult_demogorgon(complaint: str) -> str:
 
 @tool
 def ask_NDGT(question: str) -> str:
-    """Ask Neil DeGrasse Tyson for a scientific perspective."""
+    """Ask NDGT for a scientific perspective on physics, biology, chemistry, or astrophysics."""
+
+    question_lower = question.lower()
+
+    if "thermodynamics" in question_lower or "energy" in question_lower:
+        return (
+            f"NDGT considers '{question}'. From a scientific perspective, "
+            "a portal would need to account for conservation of energy, entropy, "
+            "and the transfer of matter or information between two regions of spacetime."
+        )
+
+    if "power" in question_lower or "electric" in question_lower or "electromagnetic" in question_lower:
+        return (
+            f"NDGT considers '{question}'. Power lines create electromagnetic fields, "
+            "and strange creatures may react to those fields through biology, magnetism, "
+            "or sensory systems we do not fully understand."
+        )
+
+    if "creature" in question_lower or "monster" in question_lower:
+        return (
+            f"NDGT considers '{question}'. Creature behaviour usually comes down to biology: "
+            "hunger, threat response, reproduction, environment, and available energy."
+        )
 
     return (
-        f"NDGT adjusts his waistcoat and considers '{question}'. "
-        "The answer likely involves physics, biology, chemistry, "
-        "or a misunderstanding of how the universe actually works."
+        f"NDGT considers '{question}'. The answer likely involves physics, biology, "
+        "chemistry, or a misunderstanding of how the universe actually works."
     )
+
+@tool
+def ask_alan_watts(question: str) -> str:
+    """Ask Alan Watts for a philosophical and mystical perspective."""
+
+    question_lower = question.lower()
+
+    if "portal" in question_lower or "dimension" in question_lower:
+        return (
+            f"Alan Watts reflects on '{question}'. A portal is not merely a doorway "
+            "between places, but a reminder that boundaries may be habits of perception. "
+            "Perhaps the universe is not divided into here and there as neatly as we imagine."
+        )
+
+    if "monster" in question_lower or "creature" in question_lower or "demogorgon" in question_lower:
+        return (
+            f"Alan Watts reflects on '{question}'. The monster may be less an error in the world "
+            "than a shadow we refuse to recognise. What appears threatening may simply be life "
+            "wearing an unfamiliar mask."
+        )
+
+    if "power" in question_lower or "electric" in question_lower or "energy" in question_lower:
+        return (
+            f"Alan Watts reflects on '{question}'. Energy is not something separate from life, "
+            "but the dance of life itself. Perhaps the strange reaction is not a malfunction, "
+            "but a rhythm we have not yet learned to hear."
+        )
+
+    return (
+        f"Alan Watts reflects on '{question}'. Perhaps the problem is not the inconsistency, "
+        "but our demand that reality behave like a tidy machine. In the Normal Objects universe, "
+        "contradiction may simply be the universe dancing in a mask."
+    )
+
 
 tools = [
     consult_demogorgon,
-    ask_NDGT
+    ask_NDGT,
+    ask_alan_watts
 ]
 
 agent = create_agent(
@@ -55,7 +111,8 @@ agent = create_agent(
 complaints = [
     "The portal appears to violate the laws of thermodynamics.",
     "Why do demogorgons sometimes eat people and sometimes don't?",
-    "Why do creatures and power lines react strangely together?"
+    "Why do creatures and power lines react strangely together?",
+    "Why does the Upside Down feel more like a dream than a place?"
 ]
 
 for complaint in complaints:
