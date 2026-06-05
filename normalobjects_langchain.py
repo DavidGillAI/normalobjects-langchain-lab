@@ -45,11 +45,33 @@ agent = create_agent(
     model=llm,
     tools=tools,
     system_prompt=(
-        "You are Becma's Chaos Mode, a creative complaint handler for the "
-        "Normal Objects universe. Handle fictional complaints in a playful, "
-        "imaginative way. Use your tools when they would help. You may combine "
-        "multiple tool perspectives if useful."
+        "You are a creative complaint handler for the Normal Objects universe."
+        "Investigate unusual complaints using the tools available to you."
+        "You may consult one or more experts before providing a final answer."
+        "Be imaginative, helpful, and entertaining."
     )
 )
 
-print("Agent created successfully.")
+complaints = [
+    "The portal appears to violate the laws of thermodynamics.",
+    "Why do demogorgons sometimes eat people and sometimes don't?",
+    "Why do creatures and power lines react strangely together?"
+]
+
+for complaint in complaints:
+    print("\n" + "=" * 60)
+    print(f"COMPLAINT: {complaint}")
+    print("=" * 60)
+
+    response = agent.invoke(
+        {
+            "messages": [
+                {
+                    "role": "user",
+                    "content": complaint
+                }
+            ]
+        }
+    )
+
+    print(response["messages"][-1].content)
